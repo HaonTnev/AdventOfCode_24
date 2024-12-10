@@ -38,17 +38,31 @@ int main()
         // std::cout << lines[i] << "\n"; // Print the new array to check if all worked
         leftColumn.push_back(std::stoi(lines[i].substr(0, 5)));
         rightColumn.push_back(std::stoi(lines[i].substr(8, 5)));
-        // std::cout << leftColumn[i] << " | " << rightColumn[i] << "\n"; // Output again to see if it worked 
+        //  std::cout << leftColumn[i] << " | " << rightColumn[i] << "\n"; // Output again to see if it worked 
     }
 
     std::sort(leftColumn.begin(), leftColumn.end());
     std::sort(rightColumn.begin(), rightColumn.end());
 
+    int similarityScore = 0;
     for(int i = 0; i < leftColumn.size(); i++)
     {
-        distanceBetweenColumns += std::abs(leftColumn[i] - rightColumn[i]);
+       // distanceBetweenColumns += std::abs(leftColumn[i] - rightColumn[i]);
+       // std::cout << leftColumn[i] << " | " << rightColumn[i] << "\n"; // Output again to see if it worked 
+       int currentValue = leftColumn[i];
+       int numOfApperances = 0;
+       for(int j = 0; j < rightColumn.size(); j++)
+       {
+            if (rightColumn[j] == currentValue)
+            {
+                //std::cout << numOfApperances << " for "  << currentValue << " Increased at " << j <<"\n";
+                numOfApperances++;
+            }  
+       } 
+       
+        similarityScore += currentValue * numOfApperances; 
     }
     
-    std::cout << distanceBetweenColumns << "\n";
+    std::cout << similarityScore << "\n";
     return 0;
 }
